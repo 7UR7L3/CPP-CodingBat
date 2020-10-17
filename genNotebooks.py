@@ -18,16 +18,16 @@ response = requests.get( baseurl );
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Warmup-1 > sleepIn\n",
-    "\n",
-    "```\n",
-    "The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in.\n",
-    "\n",
-    "\n",
-    "sleepIn(false, false) → true\n",
-    "sleepIn(true, false) → false\n",
-    "sleepIn(false, true) → true\n",
-    "```"
+	"# Warmup-1 > sleepIn\n",
+	"\n",
+	"```\n",
+	"The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in.\n",
+	"\n",
+	"\n",
+	"sleepIn(false, false) → true\n",
+	"sleepIn(true, false) → false\n",
+	"sleepIn(false, true) → true\n",
+	"```"
    ]
   },
   {
@@ -36,16 +36,16 @@ response = requests.get( baseurl );
    "metadata": {},
    "outputs": [],
    "source": [
-    "bool sleepIn(bool weekday, bool vacation)\n",
-    "{\n",
-    "    return true;\n",
-    "}\n",
-    "\n",
-    "// tests:\n",
-    "printTest( \"sleepIn(false, false) → true\", sleepIn(false, false), true );\n",
-    "printTest( \"sleepIn(true, false) → false\", sleepIn(true, false), false );\n",
-    "printTest( \"sleepIn(false, true) → true\", sleepIn(false, true), true );\n",
-    "printTest( \"sleepIn(true, true) → true\", sleepIn(true, true), true );"
+	"bool sleepIn(bool weekday, bool vacation)\n",
+	"{\n",
+	"    return true;\n",
+	"}\n",
+	"\n",
+	"// tests:\n",
+	"printTest( \"sleepIn(false, false) → true\", sleepIn(false, false), true );\n",
+	"printTest( \"sleepIn(true, false) → false\", sleepIn(true, false), false );\n",
+	"printTest( \"sleepIn(false, true) → true\", sleepIn(false, true), true );\n",
+	"printTest( \"sleepIn(true, true) → true\", sleepIn(true, true), true );"
    ]
   }
 """
@@ -60,11 +60,11 @@ nbStub = \
    "metadata": {},
    "outputs": [],
    "source": [
-    "#include <iostream>\\n",
-    "#include <iomanip>\\n",
-    "#include <vector>\\n",
-    "\\n",
-    "using namespace std;"
+	"#include <iostream>\\n",
+	"#include <iomanip>\\n",
+	"#include <vector>\\n",
+	"\\n",
+	"using namespace std;"
    ]
   },
   {
@@ -73,26 +73,26 @@ nbStub = \
    "metadata": {},
    "outputs": [],
    "source": [
-    "template<class A> void printTest( string str, A run, A expected )\\n",
-    "{\\n",
-    "    if( run == expected )\\n",
-    "        cout << boolalpha << \\"\\\\033[1;32m\\"\\n",
-    "            << \\"Expected: \\" << setw(60) << left << str << \\" Run: \\" << setw(20) << left << run << \\"\\\\t\\\\tOK\\"\\n",
-    "            << \\"\\\\033[0m\\" << endl;\\n",
-    "    else\\n",
-    "        cerr << boolalpha << \\"\\\\033[1;31m\\"\\n",
-    "            << \\"Expected: \\" << setw(60) << left << str << \\" Run: \\" << setw(20) << left << run << \\"\\\\t\\\\tX\\"\\n",
-    "            << \\"\\\\033[0m\\" << endl;\\n",
-    "}\\n",
-    "void printTest( string str, string run, const char* expected ){ printTest( str, \\"\\\\\\"\\"+run+\\"\\\\\\"\\", \\"\\\\\\"\\"+string( expected )+\\"\\\\\\"\\" ); }\\n",
-    "template<class A> void printTest( string str, vector<A> run, vector<A> expected )\\n",
-    "{\\n",
-    "    string runStr = \\"[\\"; for( A a : run ) runStr += to_string( a ) + \\", \\";\\n",
-    "    if( runStr.length() > 1 ) runStr = runStr.substr(0, runStr.length()-2); runStr += \\"]\\";\\n",
-    "    string expStr = \\"[\\"; for( A a : expected ) expStr += to_string( a ) + \\", \\";\\n",
-    "    if( expStr.length() > 1 ) expStr = expStr.substr(0, expStr.length()-2); expStr += \\"]\\";\\n",
-    "    printTest( str, runStr, expStr );\\n",
-    "}"
+	"namespace testns { template<class A> void printTest( string str, A run, A expected )\\n",
+	"{\\n",
+	"    if( run == expected )\\n",
+	"        cout << boolalpha << \\"\\\\033[1;32m\\"\\n",
+	"            << \\"Expected: \\" << setw(60) << left << str << \\" Run: \\" << setw(20) << left << run << \\"\\\\t\\\\tOK\\"\\n",
+	"            << \\"\\\\033[0m\\" << endl;\\n",
+	"    else\\n",
+	"        cerr << boolalpha << \\"\\\\033[1;31m\\"\\n",
+	"            << \\"Expected: \\" << setw(60) << left << str << \\" Run: \\" << setw(20) << left << run << \\"\\\\t\\\\tX\\"\\n",
+	"            << \\"\\\\033[0m\\" << endl;\\n",
+	"} } using namespace testns;\\n",
+	"void printTest( string str, string run, const char* expected ){ printTest( str, \\"\\\\\\"\\"+run+\\"\\\\\\"\\", \\"\\\\\\"\\"+string( expected )+\\"\\\\\\"\\" ); }\\n",
+	"template<class A> void printTest( string str, vector<A> run, vector<A> expected )\\n",
+	"{\\n",
+	"    string runStr = \\"[\\"; for( A a : run ) runStr += to_string( a ) + \\", \\";\\n",
+	"    if( runStr.length() > 1 ) runStr = runStr.substr(0, runStr.length()-2); runStr += \\"]\\";\\n",
+	"    string expStr = \\"[\\"; for( A a : expected ) expStr += to_string( a ) + \\", \\";\\n",
+	"    if( expStr.length() > 1 ) expStr = expStr.substr(0, expStr.length()-2); expStr += \\"]\\";\\n",
+	"    printTest( str, runStr, expStr );\\n",
+	"}"
    ]
   },
 CODINGBAT_PROBLEMS_HERE
@@ -135,10 +135,11 @@ for link in BeautifulSoup(response.text, parse_only=SoupStrainer('a'), features=
 				el = bs.select_one( ".go" ).parent.previousSibling;
 				while el != None:
 					if not isinstance(el, NavigableString) and el.has_attr( "class" ) and "minh" in el[ "class" ]: problemInfo.insert( 0, "" );
-					problemInfo.insert( 0, textwrap.fill( el.string or "", 80 ) );
+					problemInfo.insert( 0, textwrap.fill( el.string or el.getText(), 80 ) );
 					el = el.previousSibling;
 
 				problemStatement = "\n".join( problemInfo ).replace( "\n\n", "\n" );
+				if problemStatement.count( "'" ) % 2 == 1: problemStatement = problemStatement.replace( "'", "ʼ" );
 
 				templateCode = bs.select_one( "#ace_div" ).string;
 
