@@ -2,7 +2,7 @@
 All https://codingbat.com/java problems converted to cpp, in notebook form.
 
 <p align="center">
-  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/7UR7L3/CPP-CodingBat/master)
+  <a href="https://mybinder.org/v2/gh/7UR7L3/CPP-CodingBat/master"><img src="https://mybinder.org/badge_logo.svg"></a>
 </p>
 
 https://mybinder.org/v2/gh/7UR7L3/CPP-CodingBat/master
