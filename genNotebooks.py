@@ -147,11 +147,23 @@ for link in BeautifulSoup(response.text, parse_only=SoupStrainer('a'), features=
 					"int": "0",
 					"boolean": "false",
 					"String": "\"\"",
-					"int[]": "new int[]{}"
+					"int[]": "new int[]{}",
+					"String[]": "new String[]{}",
+					"List": "null"
 				}
-				retType = ( re.search( r"public (.*?) ", templateCode ) or re.search( r"^(.*?) ", templateCode )).group( 1 );
+				retType = ( re.search( r"public (.*?) \w+\(", templateCode ) or re.search( r"^(.*?) \w+\(", templateCode )).group( 1 );
+				# retType = dummyRets[ retType ];
+				if retType == "int": dummyRet = "0";
+				elif retType == "boolean": dummyRet = "false";
+				elif retType == "String": dummyRet = "\"\"";
+				elif m:=re.match( r"(.*)\[\]", retType ): dummyRet = "new " + m.group() + "{}";
+				elif retType == "List": dummyRet = "null";
+				elif m:=re.match( r"List<(.*)>", retType ): dummyRet = "new List<>()"
+				else:
+					print( "\t\t\tUNHANDLED RET TYPE", retType );
+					dummyRet = "null";
 
-				dummySubmittableJava = templateCode.replace( "  \n}", "    return " + dummyRets[retType] + ";\n}" );
+				dummySubmittableJava = templateCode.replace( "  \n}", "    return " + dummyRet + ";\n}" );
 				testsResp = requests.post( "https://codingbat.com/run", data={ "id": problem["href"][len("/prob/"):], "code": dummySubmittableJava } );
 				tests = [ test.select_one( "td" ).string for test in BeautifulSoup( testsResp.text, parse_only=SoupStrainer( "tr" ), features="html.parser" ) if test.select_one( "td" ) ];
 				
@@ -179,10 +191,15 @@ for link in BeautifulSoup(response.text, parse_only=SoupStrainer('a'), features=
 
 				dummyCpp = dummySubmittableJava \
 					.replace( "public ", "" ) \
-					.replace( "boolean", "bool" );
+					.replace( "boolean", "bool" ) \
+					.replace( "Integer", "int" ) \
+					.replace( "List", "vector" );
 				dummyCpp = re.sub( r"(?<!\w)String", "string", dummyCpp );
 				dummyCpp = dummyCpp.replace( "return new int[]{};", "return vector<int>{};" );
+				dummyCpp = dummyCpp.replace( "return new vector<>();", "return {}" );
+				# dummyCpp = dummyCpp.replace( "return null;", "return NULL;" );
 				dummyCpp = re.sub( r"(\w+)\[\]", "vector<\\1>", dummyCpp );
+				dummyCpp = re.sub( r"^vector<(.*?)>", "std::vector<\\1>", dummyCpp, flags=re.M );
 				cppSource += dummyCpp;
 				cppSource += "\n\n// tests:\n";
 				for test in tests:
